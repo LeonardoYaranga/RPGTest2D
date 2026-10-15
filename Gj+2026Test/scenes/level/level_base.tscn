@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dmj37aidyoj7q"]
+
+[ext_resource type="TileSet" uid="uid://77rkrm0opm0p" path="res://resources/level_base.tres" id="1_tileset"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_base"]
+source_geometry_mode = 2
+source_geometry_group_name = &"physic"
+
+[node name="LevelBase" type="Node2D" unique_id=1]
+y_sort_enabled = true
+
+[node name="Obscure" type="CanvasModulate" parent="." unique_id=2]
+color = Color(0.5866749, 0.5866749, 0.5866749, 1)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=3]
+navigation_polygon = SubResource("NavigationPolygon_base")
+
+[node name="Tiles" type="Node2D" parent="." unique_id=4]
+y_sort_enabled = true
+
+[node name="Floor" type="TileMapLayer" parent="Tiles" unique_id=5]
+z_index = -2
+tile_set = ExtResource("1_tileset")
+
+[node name="Walls" type="TileMapLayer" parent="Tiles" unique_id=6 groups=["physic"]]
+z_index = -1
+tile_set = ExtResource("1_tileset")
+
+[node name="Furniture" type="TileMapLayer" parent="Tiles" unique_id=7 groups=["physic"]]
+y_sort_enabled = true
+tile_set = ExtResource("1_tileset")
+
+[node name="Collectibles" type="Node2D" parent="." unique_id=8]
+
+[node name="Interactives" type="Node2D" parent="." unique_id=9]
+
+[node name="Doors" type="Node2D" parent="." unique_id=10]
+
+[node name="LightPoints" type="Node2D" parent="." unique_id=11]
+
+[node name="PlayerPos" type="Marker2D" parent="." unique_id=12]
+
+[node name="AmbientMusic" type="AudioStreamPlayer" parent="." unique_id=13]
+volume_db = -10.0
+autoplay = true

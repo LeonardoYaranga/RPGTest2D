@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_enemy"]
+[ext_resource type="Texture2D" uid="uid://c6wqp1r00af3q" path="res://assets/player/16x32/16x32 All Animations-Sheet.png" id="2_sheet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hurt"]
+height = 34.0
+radius = 10.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_enemy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.55, 0.55, 1)
+position = Vector2(0, -6)
+texture = ExtResource("2_sheet")
+hframes = 35
+vframes = 7
+frame = 39
+region_enabled = true
+region_rect = Rect2(0, 1, 1120, 224)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_body")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_hurt")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -20.0
+offset_top = -38.0
+offset_right = 20.0
+offset_bottom = -30.0
+max_value = 60.0
+value = 60.0
+show_percentage = false

@@ -1,0 +1,264 @@
+{
+  "main": {
+    "id": "5b842aac7d3bab71",
+    "type": "split",
+    "children": [
+      {
+        "id": "b21ed6f88edaeab9",
+        "type": "tabs",
+        "dimension": 49.57356076759063,
+        "children": [
+          {
+            "id": "c144ee9718e25d46",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/History/Characters/Plantilla_Ficha_Personaje.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Plantilla_Ficha_Personaje"
+            }
+          }
+        ]
+      },
+      {
+        "id": "03f0fd75e9b152a4",
+        "type": "tabs",
+        "dimension": 50.42643923240937,
+        "children": [
+          {
+            "id": "39ca53748039e5f6",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "docs/History/Examples/5Steps.canvas",
+                "viewState": {
+                  "x": -647.9200282025654,
+                  "y": 758.7030934138625,
+                  "zoom": -0.7829864234156946
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "5Steps"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "230b8824ae45b47e",
+    "type": "split",
+    "children": [
+      {
+        "id": "f4f6cefeb8a0f60a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "be6d884eb866f96c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "9a6a498e074f9e42",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "15f9f69ca165ed98",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0f73c2805fb71fa9",
+    "type": "split",
+    "children": [
+      {
+        "id": "caefdd4ae79e6be7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "861f83ff28be7442",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/History/Characters/Examples/4Steps.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "9eee87283b34f862",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/History/Characters/Examples/4Steps.canvas",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "4927f90028c16158",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f6841ed7ddad23df",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "a2e3feaa95e7ff65",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/History/Characters/Examples/4Steps.canvas",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "be6d884eb866f96c",
+  "lastOpenFiles": [
+    "Gj+2026Test/INTERACT_SYSTEM_PLAN.md-7cVsJQ",
+    "Gj+2026Test/scenes/level/test/test_level.tscn-bJqgmx",
+    "Gj+2026Test/resources/level_base.tres",
+    "Gj+2026Test/resources/level_base.tres-AICTw0",
+    "Gj+2026Test/resources/level_outdoors.tres",
+    "Gj+2026Test/resources/level_outdoors.tres-PY3xs8",
+    "Gj+2026Test/assets/tilemap/roguelike_indoors/roguelikeIndoor_transparent.png.import",
+    "Gj+2026Test/assets/tilemap/tiny_dungeon/tilemap.png.import",
+    "Gj+2026Test/assets/tilemap/tiny_dungeon/tilemap.png.import-2tKiRS",
+    "Gj+2026Test/assets/tilemap/tiny_dungeon/tilemap.png",
+    "Gj+2026Test/assets/tilemap/tiny_dungeon",
+    "Gj+2026Test/assets/tilemap/roguelike_indoors/roguelikeIndoor_transparent.png",
+    "Gj+2026Test/assets/tilemap/roguelike_indoors",
+    "kenney_tiny-dungeon/Tilemap/tilemap.png",
+    "kenney_tiny-dungeon/Tilemap/tilemap_packed.png",
+    "kenney_tiny-dungeon/Sample.png",
+    "kenney_tiny-dungeon/Preview.png",
+    "kenney_tiny-dungeon/Tiles/tile_0131.png",
+    "kenney_tiny-dungeon/Tiles/tile_0130.png",
+    "kenney_tiny-dungeon/Tiles/tile_0129.png",
+    "kenney_tiny-dungeon/Tiles/tile_0128.png",
+    "Gj+2026Test/CREDITS.md",
+    "Gj+2026Test/INTERACT_SYSTEM_PLAN.md",
+    "Gj+2026Test/addons/godot_ai/README.md",
+    "docs/History/Examples/5Steps.canvas",
+    "delete.md",
+    "delete.canvas",
+    "docs/History/Characters/Plantilla_Ficha_Personaje.md",
+    "docs/History/Examples/4Steps.canvas",
+    "docs/History/Stuctures.canvas",
+    "docs/History/Structure.md",
+    "docs/History/Characters/Refs/RefAntagonist.canvas",
+    "docs/Narrative/Plantillas/Plantilla_Ficha_Personaje.md",
+    "docs/Narrative/Plantillas/Plantilla_Capitulo_Escena.md",
+    "docs/Narrative/Plantillas/Ejemplo_Comparativo_Sintaxis.md",
+    "docs/Narrative/Capitulos/Bucle_03_Camuflaje_y_Escape.md",
+    "docs/Narrative/Capitulos/Bucle_02_Seguridad_y_el_Ataque.md",
+    "docs/Narrative/Capitulos/Bucle_01_El_Despertar_y_el_Hacking.md",
+    "docs/Narrative/Capitulos/--HowItWorks--.md",
+    "docs/Narrative/00_Guia_Estructura_y_Sintaxis.md",
+    "docs/Narrative/Characters/Paciente_6174.md",
+    "docs/Narrative/Characters/La_Mujer_de_la_Foto.md",
+    "docs/Narrative/Characters/Guardias_de_Seguridad.md",
+    "docs/Narrative/Personajes_Overview.md",
+    "docs/Narrative/Mundo_y_Premisa.md"
+  ]
+}

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/attacks/attack_definition.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"kick_finisher"
+animation = &"attack"
+speed_scale = 0.9
+damage = 9
+hitstop = 0.0
+hit_delay = 0.16
+hit_window = 0.12
+hitbox_offset = Vector2(18, -10)
+hitbox_size = Vector2(30, 26)
+hitstun = 0.35
+knockback = Vector2(160, 0)
+launch = 380.0
+cancel_time = 0.2
+combo_window = 0.0
+lunge = 40.0
+stamina_cost = 0.0

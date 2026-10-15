@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/attacks/attack_definition.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"straight"
+animation = &"attack"
+speed_scale = 1.2
+damage = 5
+hitstop = 0.0
+hit_delay = 0.1
+hit_window = 0.08
+hitbox_offset = Vector2(16, -10)
+hitbox_size = Vector2(26, 24)
+hitstun = 0.2
+knockback = Vector2(90, 0)
+launch = 0.0
+cancel_time = 0.16
+combo_window = 0.35
+lunge = 34.0
+stamina_cost = 0.0

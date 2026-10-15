@@ -1,0 +1,22 @@
+{
+	"nodes":[
+		{"id":"2d1f80dd21323069","type":"text","text":"4. **CONCLUSION**\n   Resultado de la situacion del personaje\n   (Se muetra como el giro afecto la situacion, el resultado de lo que sucedio, conocer la reaccion de los personajes a lo que ha pasado)","x":422,"y":-137,"width":315,"height":255},
+		{"id":"5166b0093533b6f1","type":"text","text":"KETSU","x":454,"y":202,"width":250,"height":60},
+		{"id":"107f1314e4d6105b","type":"text","text":"1. **INICIO**\n   Protagonista\n   Situacion y Contexto","x":-736,"y":-117,"width":360,"height":235},
+		{"id":"c13e1456887ec9c2","type":"text","text":"KI","x":-681,"y":202,"width":250,"height":60},
+		{"id":"9623d0c2ddf6a6fa","type":"text","text":"2. **DESARROLLO**\n   Desarrollo de personajes\n   Desarrollo de la situacion y el mundo","x":-316,"y":-52,"width":310,"height":220},
+		{"id":"dfd1c0f19184bf60","type":"text","text":"SHO","x":-286,"y":202,"width":250,"height":60},
+		{"id":"1609924545d85962","type":"text","text":"3. **GIRO**\n   El Climax\n   La parte con mas intensidad\n   Lo cual cambia la normalidad antes presentada\n   (No necesariamente es un conflicto a ser solucionado, se puede revelar informacion que antes no fue revelada, introducir un nuevo personaje nunca antes visto)","x":64,"y":-157,"width":300,"height":325},
+		{"id":"6585fcf42c50d3d7","type":"text","text":"TEN","x":89,"y":202,"width":250,"height":60},
+		{"id":"5bf480e9c78f8815","type":"text","text":"# 4 PASOS (KISHOTENKETSU)","x":-36,"y":-262,"width":560,"height":50}
+	],
+	"edges":[
+		{"id":"70ddcc208b174b33","fromNode":"2d1f80dd21323069","fromSide":"bottom","toNode":"5166b0093533b6f1","toSide":"top"},
+		{"id":"1964577392ecff31","fromNode":"6585fcf42c50d3d7","fromSide":"right","toNode":"5166b0093533b6f1","toSide":"left"},
+		{"id":"78ae4e61675059b9","fromNode":"107f1314e4d6105b","fromSide":"bottom","toNode":"c13e1456887ec9c2","toSide":"top"},
+		{"id":"f640d521a84b8ccc","fromNode":"c13e1456887ec9c2","fromSide":"right","toNode":"dfd1c0f19184bf60","toSide":"left"},
+		{"id":"60b00ff34f365016","fromNode":"9623d0c2ddf6a6fa","fromSide":"bottom","toNode":"dfd1c0f19184bf60","toSide":"top"},
+		{"id":"d7ba75eea80f041c","fromNode":"dfd1c0f19184bf60","fromSide":"right","toNode":"6585fcf42c50d3d7","toSide":"left"},
+		{"id":"ebdbf481f2a371c7","fromNode":"1609924545d85962","fromSide":"bottom","toNode":"6585fcf42c50d3d7","toSide":"top"}
+	]
+}

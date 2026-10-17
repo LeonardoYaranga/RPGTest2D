@@ -9,6 +9,8 @@ enum Behavior { TRAINING_DUMMY, FIGHTER }
 @export var max_health: int = 60
 @export var knockback_friction: float = 8.0
 @export var hit_flash_time: float = 0.12
+## Print hit / health events to the Godot Output panel.
+@export var debug_log: bool = true
 
 @onready var sprite: Sprite2D = get_node_or_null("Sprite2D") as Sprite2D
 @onready var health_bar: ProgressBar = get_node_or_null("HealthBar") as ProgressBar
@@ -61,6 +63,8 @@ func take_hit(attack: AttackDefinition, source_position: Vector2) -> void:
 	if health_bar:
 		health_bar.value = health
 	SignalHub.emit_on_enemy_health_changed(health, max_health)
+	if debug_log:
+		print("[ENEMY] %s took %d (%s) -> hp %d/%d" % [name, attack.damage, attack.id, health, max_health])
 
 	var dir: float = signf(global_position.x - source_position.x)
 	if is_zero_approx(dir):
@@ -84,5 +88,7 @@ func take_hit(attack: AttackDefinition, source_position: Vector2) -> void:
 
 
 func _die() -> void:
+	if debug_log:
+		print("[ENEMY] %s died" % name)
 	SignalHub.emit_on_enemy_died(self)
 	queue_free()

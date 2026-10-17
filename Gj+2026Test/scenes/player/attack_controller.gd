@@ -8,6 +8,10 @@ extends Node
 
 signal combo_changed(count: int)
 
+## Print every buffer / combo / hit event to the Godot Output panel.
+## Toggle in the Inspector on the Player's AttackController node.
+@export var debug_log: bool = true
+
 const JAB: AttackDefinition = preload("res://resources/attacks/jab.tres")
 const STRAIGHT: AttackDefinition = preload("res://resources/attacks/straight.tres")
 const HOOK: AttackDefinition = preload("res://resources/attacks/hook.tres")
@@ -102,8 +106,11 @@ func _physics_process(delta: float) -> void:
 
 #region Combo resolution
 func _press(token: String) -> void:
+	_log("IN  press '%s'   buffer='%s'   attacking=%s" % [token, _buffer, _is_attacking])
 	if _is_attacking:
 		_pending = token
+		var ct: float = _current.cancel_time if _current != null else 0.0
+		_log("    buffered as _pending='%s' (will chain at cancel_time %.2fs)" % [token, ct])
 	else:
 		_advance(token)
 
@@ -112,15 +119,30 @@ func _advance(token: String) -> void:
 	var candidate: String = _buffer + token
 	if COMBO_TABLE.has(candidate):
 		_buffer = candidate
+		if _is_finisher(candidate):
+			_log("MATCH '%s' -> %s   *** COMBO! ***" % [candidate, COMBO_TABLE[candidate].id])
+		else:
+			_log("MATCH '%s' -> %s" % [candidate, COMBO_TABLE[candidate].id])
 		_play(COMBO_TABLE[candidate])
 		return
 
 	# Not a valid continuation: restart the chain from this token.
+	_log("NO continuation for '%s'  -> chain reset" % candidate)
 	_buffer = token if COMBO_TABLE.has(token) else ""
 	if _buffer != "":
+		_log("    restarted as '%s' -> %s (fresh)" % [_buffer, COMBO_TABLE[_buffer].id])
 		_play(COMBO_TABLE[_buffer])
 	else:
 		_set_combo(0)
+
+
+## True when a buffer string is a completed finisher (not a prefix of a longer
+## combo), i.e. the chain "landed". Used only for the debug printout.
+func _is_finisher(seq: String) -> bool:
+	for key in COMBO_TABLE:
+		if key.length() > seq.length() and key.begins_with(seq):
+			return false
+	return true
 #endregion
 
 
@@ -133,6 +155,8 @@ func _play(attack: AttackDefinition) -> void:
 	_hit_targets.clear()
 	_window_timer.stop()
 	_set_combo(_buffer.length())
+	_log("    PLAY %s   (chain '%s', window %.2fs, cancel %.2fs)" % [
+		attack.id, _buffer, attack.combo_window, attack.cancel_time])
 
 	var direction: float = -1.0 if player.sprite_2d.flip_h else 1.0
 	if attack.lunge != 0.0:
@@ -143,6 +167,7 @@ func _play(attack: AttackDefinition) -> void:
 
 func _finish() -> void:
 	var combo_window: float = _current.combo_window
+	_log("    END %s (buffer='%s', pending='%s')" % [_current.id, _buffer, _pending])
 	_is_attacking = false
 	_current = null
 	player.end_attack()
@@ -215,14 +240,24 @@ func _check_hits() -> void:
 			continue
 		if target.has_method("take_hit"):
 			_hit_targets.append(target)
+			_log("    HIT %s with %s (dmg %d)" % [target.name, _current.id, _current.damage])
 			target.take_hit(_current, player.global_position)
 #endregion
 
 
 func _on_combo_window_timeout() -> void:
+	if _buffer != "":
+		_log("combo window EXPIRED -> buffer '%s' cleared (next press = fresh basic)" % _buffer)
 	_buffer = ""
 	_set_combo(0)
 
 
 func _set_combo(count: int) -> void:
 	combo_changed.emit(count)
+
+
+## Single place that writes combo logs, so the prefix is consistent and the
+## whole feature can be silenced with the `debug_log` export.
+func _log(msg: String) -> void:
+	if debug_log:
+		print("[COMBO] " + msg)

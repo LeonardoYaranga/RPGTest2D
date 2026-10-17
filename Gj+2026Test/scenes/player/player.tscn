@@ -4,6 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://c6wqp1r00af3q" path="res://assets/player/16x32/16x32 All Animations-Sheet.png" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://cfkhrrql17p3q" path="res://scenes/player/attack_controller.gd" id="3_gmlin"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_mjdfx"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_mjdfx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mjdfx"]
@@ -245,6 +253,10 @@ vframes = 7
 frame = 39
 region_enabled = true
 region_rect = Rect2(0, 1, 1120, 224)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=480121668]
+sprite_frames = SubResource("SpriteFrames_mjdfx")
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=822416416]
 shape = SubResource("CircleShape2D_mjdfx")

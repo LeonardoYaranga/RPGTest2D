@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cxl8swxk7t7sx"]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_base_3d.tscn" id="1_base"]
+
+[node name="TrainingDummy3D" unique_id=666971282 instance=ExtResource("1_base")]
+base_tint = Color(1, 0.55, 0.55, 1)

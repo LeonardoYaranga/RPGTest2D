@@ -1,0 +1,85 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/character_3d.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy_base_3d.gd" id="2_enemy"]
+[ext_resource type="Script" path="res://scenes/enemies/states/enemy_idle_state.gd" id="3_idle"]
+[ext_resource type="Script" path="res://core/state_machine/states/hurt_state.gd" id="4_hurt"]
+[ext_resource type="Script" path="res://core/state_machine/states/launched_state.gd" id="5_launched"]
+[ext_resource type="Script" path="res://core/state_machine/states/knockdown_state.gd" id="6_knockdown"]
+[ext_resource type="Script" path="res://core/state_machine/states/getup_state.gd" id="7_getup"]
+[ext_resource type="Script" path="res://core/state_machine/states/dead_state.gd" id="8_dead"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.1, 0.1, 0.12, 0.85)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
+bg_color = Color(0.86, 0.2, 0.24, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="EnemyBase3D" groups=["enemy"] instance=ExtResource("1_base")]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("2_enemy")
+aggro_radius = 9.0
+attack_range_x = 1.15
+attack_range_z = 0.55
+max_health = 60
+move_speed = 3.0
+debug_log = true
+
+[node name="Hurtbox" parent="." index="4"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("3_idle")
+
+[node name="Hurt" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("4_hurt")
+
+[node name="Launched" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("5_launched")
+
+[node name="Knockdown" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("6_knockdown")
+
+[node name="GetUp" type="Node" parent="StateMachine" index="4"]
+script = ExtResource("7_getup")
+
+[node name="Dead" type="Node" parent="StateMachine" index="5"]
+script = ExtResource("8_dead")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="6"]
+path_desired_distance = 0.4
+target_desired_distance = 0.6
+
+[node name="HealthViewport" type="SubViewport" parent="." index="7"]
+transparent_bg = true
+size = Vector2i(80, 12)
+render_target_update_mode = 3
+
+[node name="HealthBar" type="ProgressBar" parent="HealthViewport"]
+offset_right = 80.0
+offset_bottom = 12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
+max_value = 60.0
+value = 60.0
+show_percentage = false
+
+[node name="HealthBarSprite" type="Sprite3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
+billboard = 1
+no_depth_test = true
+pixel_size = 0.015
+texture_filter = 0

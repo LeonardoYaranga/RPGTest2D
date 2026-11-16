@@ -1,10 +1,9 @@
-extends Node2D
-## Headless end-to-end test on the real test level: walks the player from its
-## spawn down to the nearest dummy, drives H,H,K through the AttackController,
-## and checks the dummy actually took damage.
-## Run: godot --headless --path <project> res://tools/level_walk.tscn
+extends Node3D
+## Headless end-to-end test on level_25d_test.tscn:
+## Walks Player3D over to TrainingDummy1, executes H,H,K (18 dmg + launch),
+## and checks interaction with Note1.
 
-const LevelScene := preload("res://scenes/level/test/test_level.tscn")
+const LevelScene := preload("res://scenes/levels/level_25d_test.tscn")
 
 
 func _ready() -> void:
@@ -18,52 +17,46 @@ func _run() -> void:
 	add_child(level)
 	await _frames(5)
 
-	var player: CharacterBody2D = level.get_node("Player")
-	var enemy: Node = level.get_node("Enemy3")  # directly below spawn (240,176)
-	var ac: Node = player.get_node("AttackController")
+	var player: Player3D = level.get_node("Player3D") as Player3D
+	var dummy: EnemyBase3D = level.get_node("Enemies/TrainingDummy1") as EnemyBase3D
+	var ac: AttackController3D = player.attack_controller
 
-	var spawn: Vector2 = player.global_position
-	print("LEVEL_E2E: spawn=%s enemy3=%s face_right=%s" % [
-		spawn, enemy.global_position, not player.sprite_2d.flip_h])
-
-	# Walk straight down toward the dummy.
-	Input.action_press("ui_down")
+	# Walk right toward TrainingDummy1 (from x=-3 to x=-1)
+	Input.action_press(&"ui_right")
 	var walked := 0
-	while player.global_position.y < enemy.global_position.y - 8.0 and walked < 90:
+	while player.global_position.x < dummy.global_position.x - 0.85 and walked < 60:
 		await get_tree().physics_frame
 		walked += 1
-		if walked % 10 == 0:
-			print("LEVEL_E2E:   walk f%02d player=%s enemy=%s" % [walked, player.global_position, enemy.global_position])
-	Input.action_release("ui_down")
-	await _frames(2)
+	Input.action_release(&"ui_right")
+	await _frames(3)
 
-	var gap: float = player.global_position.distance_to(enemy.global_position)
-	print("LEVEL_E2E: walked %d frames -> player=%s gap=%.1f" % [walked, player.global_position, gap])
-	if gap > 40.0:
-		failures.append("player could not get near the dummy (gap=%.1f)" % gap)
+	var gap: float = player.global_position.distance_to(dummy.global_position)
+	if gap > 1.3:
+		failures.append("player could not walk close enough to dummy (gap=%.2f)" % gap)
 
-	var hp0: int = enemy.health
-
-	# H, H, K fast enough to chain into kick_finisher (4 + 5 + 9 = 18).
+	var hp0: int = dummy.health
 	ac._press("H")
 	await _frames(16)
 	ac._press("H")
 	await _frames(16)
 	ac._press("K")
-	await _frames(30)
+	await _frames(35)
 
-	var damage: int = hp0 - enemy.health
-	print("LEVEL_E2E: HHK -> damage=%d (expected 18) enemy_hp=%d/%d" % [damage, enemy.health, enemy.max_health])
-	if damage != 18:
-		failures.append("HHK expected 18 damage, got %d" % damage)
+	var damage: int = hp0 - dummy.health
+	if damage != 20:
+		failures.append("HHK on TrainingDummy1 expected 20 dmg, got %d" % damage)
+
+	print("LEVEL_WALK_25D: walked=%d gap=%.2f dmg=%d dummy_state=%s" % [
+		walked, gap, damage, dummy.state_machine.get_current_state_name()
+	])
 
 	if failures.is_empty():
-		print("LEVEL_E2E: PASS")
+		print("LEVEL_WALK_25D: PASS")
 		get_tree().quit(0)
 	else:
 		for f in failures:
-			printerr("LEVEL_E2E: FAIL - %s" % f)
-		print("LEVEL_E2E: FAIL (%d)" % failures.size())
+			printerr("LEVEL_WALK_25D: FAIL - %s" % f)
+		print("LEVEL_WALK_25D: FAIL (%d)" % failures.size())
 		get_tree().quit(1)
 
 

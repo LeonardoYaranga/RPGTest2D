@@ -1,43 +1,55 @@
 class_name AttackDefinition
 extends Resource
-## Data for a single attack (a "move") that can be part of a combo.
-## Create one .tres per move and reference it from AttackController.
+## Data for a single 2.5D/3D attack (a "move") that can be part of a combo.
+## Create one .tres per move and reference it from AttackController3D.
+
+enum HitReaction {
+	HITSTUN,   ## Normal grounded flinch with short slide, stays standing.
+	STAGGER,   ## Heavy flinch with longer pause/stumble, still grounded.
+	KNOCKDOWN, ## Drops enemy directly to the floor (KnockdownState) with low/no vertical height.
+	LAUNCH,    ## Launches enemy high into the air for airborne juggle (LaunchedState).
+}
 
 @export var id: StringName = &"jab"
-## AnimationPlayer animation played for this move.
-## The AnimationTree is paused while attacking, so this bypasses the state machine.
+## Animation played on AnimatedSprite3D for this move.
 @export var animation: StringName = &"attack"
 ## Playback speed multiplier for this move.
 @export var speed_scale: float = 1.0
+## Optional duration override in seconds (<= 0 infers from SpriteFrames).
+@export var duration: float = 0.0
 
 @export_group("Damage")
 @export var damage: int = 4
-## Freeze frames on connect (reserved for polish).
-@export var hitstop: float = 0.0
+## Freeze frames applied to attacker + target on connect (seconds).
+@export var hitstop: float = 0.04
 
 @export_group("Hitbox")
-## Time (seconds) before the hitbox becomes active.
+## Time (seconds) before the 3D hitbox becomes active.
 @export var hit_delay: float = 0.10
 ## How long the hitbox stays active.
 @export var hit_window: float = 0.08
-## Offset of the hitbox from the player (x is mirrored by facing).
-@export var hitbox_offset: Vector2 = Vector2(14, -10)
-@export var hitbox_size: Vector2 = Vector2(24, 24)
+## 3D offset from the attacker (x is mirrored by facing).
+@export var hitbox_offset: Vector3 = Vector3(0.85, 0.75, 0.0)
+## Full size of the BoxShape3D (keep Z generous so brawler combos connect cleanly).
+@export var hitbox_size: Vector3 = Vector3(1.15, 1.35, 1.15)
 
 @export_group("Reaction")
-## The target cannot act for this long.
-@export var hitstun: float = 0.18
-## Horizontal push applied to the target.
-@export var knockback: Vector2 = Vector2(60, 0)
-## > 0 launches the target airborne (used by finishers, phase 3+).
+## Reaction type triggered on the receiver.
+@export var reaction_type: HitReaction = HitReaction.HITSTUN
+## Ground hitstun duration (seconds) when launch == 0.
+@export var hitstun: float = 0.20
+## Push applied in 3D (x away from attacker, z depth).
+@export var knockback: Vector3 = Vector3(2.8, 0.0, 0.0)
+## > 0 launches the target airborne (+Y velocity), triggering Launched -> Knockdown -> GetUp.
 @export var launch: float = 0.0
+## If true, can hit targets lying on the ground (OTG).
+@export var can_hit_knockdown: bool = false
 
 @export_group("Combo")
-## From this time on, the next input can cancel the recovery.
+## From this time on, the next input can cancel recovery into the next hit.
 @export var cancel_time: float = 0.14
-## Extra time after the move ends during which input still chains.
-## Set to 0 on finishers to end the combo.
+## Extra time after the move ends during which input still chains. Set 0 on finishers.
 @export var combo_window: float = 0.35
-## Small forward step at the start of the move.
-@export var lunge: float = 30.0
+## Forward lunge speed along facing at the start of the move (m/s).
+@export var lunge: float = 1.6
 @export var stamina_cost: float = 0.0

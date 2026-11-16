@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/characters/character_3d.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/player/player_3d.gd" id="2_player"]
+[ext_resource type="Script" path="res://scenes/player/states/player_idle_state.gd" id="3_idle"]
+[ext_resource type="Script" path="res://scenes/player/states/player_move_state.gd" id="4_move"]
+[ext_resource type="Script" path="res://scenes/player/states/player_jump_state.gd" id="5_jump"]
+[ext_resource type="Script" path="res://scenes/player/states/player_attack_state.gd" id="6_attack"]
+[ext_resource type="Script" path="res://core/state_machine/states/hurt_state.gd" id="7_hurt"]
+[ext_resource type="Script" path="res://core/state_machine/states/dead_state.gd" id="8_dead"]
+[ext_resource type="Script" path="res://scenes/player/camera_25d.gd" id="9_cam"]
+[ext_resource type="Script" path="res://scenes/player/attack_controller_3d.gd" id="10_ac"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_interact"]
+radius = 1.25
+
+[node name="Player3D" groups=["player"] instance=ExtResource("1_base")]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("2_player")
+jump_force = 7.6
+stamina = 100.0
+max_stamina = 100.0
+stamina_regen_rate = 20.0
+stamina_regen_delay = 1.0
+sprint_cost = 25.0
+sprint_speed_multiplier = 1.6
+pause_tree_on_death = true
+hit_flash_color = Color(1, 0.35, 0.35, 1)
+
+[node name="Hurtbox" parent="." index="4"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("3_idle")
+
+[node name="Move" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("4_move")
+
+[node name="Jump" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("5_jump")
+
+[node name="Attack" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("6_attack")
+
+[node name="Hurt" type="Node" parent="StateMachine" index="4"]
+script = ExtResource("7_hurt")
+
+[node name="Dead" type="Node" parent="StateMachine" index="5"]
+script = ExtResource("8_dead")
+auto_free = false
+
+[node name="CameraRig" type="Node3D" parent="." index="6"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" index="0" node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.809017, 0.58778524, 0, -0.58778524, 0.809017, 0, 6.4656377, 8.899187)
+fov = 38.0
+script = ExtResource("9_cam")
+target = NodePath("../..")
+
+[node name="InteractZone" type="Area3D" parent="." index="7"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractZone" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("SphereShape3D_interact")
+
+[node name="AttackController" type="Node" parent="." index="8"]
+script = ExtResource("10_ac")
+
+[node name="StaminaRegenTimer" type="Timer" parent="." index="9"]
+one_shot = true
+
+[node name="StepsSound" type="AudioStreamPlayer" parent="." index="10"]

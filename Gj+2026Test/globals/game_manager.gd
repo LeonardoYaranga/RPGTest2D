@@ -1,7 +1,7 @@
 extends Node
 
 const FADER = preload("res://scenes/fader/fader.tscn")
-const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
+const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player_3d.tscn")
 const GAME_HUD_SCENE: PackedScene = preload("res://scenes/game_hud/game_hud.tscn")
 
 const MAIN = null
@@ -113,16 +113,16 @@ func _setup_scene_entities(scene: Node) -> void:
 		hud_layer.add_child(GAME_HUD_SCENE.instantiate())
 		scene.add_child(hud_layer)
 
-	var existing_player: Player = scene.find_child("Player", true, false) as Player
+	var existing_player: Player3D = scene.find_child("Player3D", true, false) as Player3D
 	if existing_player == null:
-		existing_player = get_tree().get_first_node_in_group("player") as Player
+		existing_player = get_tree().get_first_node_in_group(&"player") as Player3D
 
-	var spawn_pos: Marker2D = scene.find_child("PlayerPos", true, false) as Marker2D
+	var spawn_pos: Marker3D = scene.find_child("PlayerPos", true, false) as Marker3D
 	if spawn_pos == null:
-		spawn_pos = scene.get_node_or_null("PlayerPos") as Marker2D
+		spawn_pos = scene.get_node_or_null("PlayerPos") as Marker3D
 
 	if existing_player == null:
-		var new_player := PLAYER_SCENE.instantiate() as Player
+		var new_player := PLAYER_SCENE.instantiate() as Player3D
 		if spawn_pos:
 			new_player.global_position = spawn_pos.global_position
 		scene.add_child(new_player)

@@ -4,6 +4,8 @@
 [ext_resource type="LabelSettings" uid="uid://dhjela5h8srsb" path="res://resources/white16.tres" id="2_7upun"]
 [ext_resource type="Texture2D" uid="uid://bhi8gmgc27im6" path="res://assets/HUD/HealthBar/greenbar (3).png" id="3_aiwwf"]
 [ext_resource type="Texture2D" uid="uid://b886h75b16sda" path="res://assets/HUD/HealthBar/greenbar (2).png" id="4_kum1k"]
+[ext_resource type="PackedScene" path="res://scenes/game_hud/pinned_combos.tscn" id="5_pinned"]
+[ext_resource type="PackedScene" path="res://scenes/game_hud/input_history.tscn" id="6_inputs"]
 
 [node name="GameHud" type="Control" unique_id=1404476535]
 process_mode = 3
@@ -105,3 +107,21 @@ texture_under = ExtResource("3_aiwwf")
 texture_progress = ExtResource("4_kum1k")
 texture_progress_offset = Vector2(0, 15)
 tint_progress = Color(0.957815, 0.7427263, 0.6941787, 1)
+
+[node name="PinnedCombos" parent="." instance=ExtResource("5_pinned")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 280.0
+offset_bottom = 260.0
+
+[node name="InputHistory" parent="." instance=ExtResource("6_inputs")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -200.0
+offset_right = 340.0
+offset_bottom = -15.0
+grow_vertical = 0

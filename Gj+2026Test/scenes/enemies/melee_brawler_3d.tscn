@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_base_3d.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/enemies/states/enemy_chase_state.gd" id="2_chase"]
+[ext_resource type="Script" path="res://scenes/enemies/states/enemy_melee_attack_state.gd" id="3_attack"]
+
+[node name="MeleeBrawler3D" instance=ExtResource("1_base")]
+max_health = 80
+move_speed = 3.2
+base_tint = Color(0.85, 0.55, 1, 1)
+
+[node name="Chase" type="Node" parent="StateMachine" index="6"]
+script = ExtResource("2_chase")
+
+[node name="Attack" type="Node" parent="StateMachine" index="7"]
+script = ExtResource("3_attack")

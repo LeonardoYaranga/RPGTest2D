@@ -6,6 +6,10 @@ extends Control
 @onready var color_rect_game_over: ColorRect = $ColorRectGameOver
 @onready var label_game_over: Label = $ColorRectGameOver/LabelGameOver
 @onready var interact_label: Label = $MCClues/InteractLabel
+@onready var quest_title: Label = $QuestPanel/VBox/QuestTitle
+@onready var quest_objective: Label = $QuestPanel/VBox/QuestObjective
+@onready var inventory_clues: Label = $QuestPanel/VBox/InventoryClues
+@onready var ending_overlay: Control = $EndingOverlay
 
 func _ready() -> void:
 	if color_rect_game_over:
@@ -14,6 +18,30 @@ func _ready() -> void:
 	SignalHub.player_stamina_changed.connect(_on_player_stamina_changed)
 	SignalHub.game_over.connect(_on_game_over)
 	SignalHub.interactable_changed.connect(_on_interactable_changed)
+	SignalHub.quest_updated.connect(_on_quest_updated)
+	SignalHub.inventory_changed.connect(_on_inventory_changed)
+
+	if is_instance_valid(GameState):
+		_on_quest_updated(GameState.current_quest_title, GameState.current_quest_objective)
+		_on_inventory_changed(GameState.inventory)
+
+func _on_quest_updated(title: String, objective: String) -> void:
+	if quest_title:
+		quest_title.text = "MISIÓN: %s" % title
+	if quest_objective:
+		quest_objective.text = objective
+
+func _on_inventory_changed(inv: Dictionary) -> void:
+	if inventory_clues == null:
+		return
+	if inv.is_empty():
+		inventory_clues.text = "Pistas: Ninguna"
+	else:
+		var items: Array[String] = []
+		for k in inv.keys():
+			if inv[k] > 0:
+				items.append("%s (x%d)" % [str(k), inv[k]])
+		inventory_clues.text = "Pistas: %s" % ", ".join(items)
 
 func _on_player_health_changed(current_health: int, max_health: int) -> void:
 	if health_bar:

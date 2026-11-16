@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/interactables/clue_pickup_3d.gd" id="1_clue"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_paper"]
+size = Vector3(0.4, 0.02, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paper"]
+albedo_color = Color(0.95, 0.92, 0.75, 1)
+roughness = 0.6
+
+[node name="CluePickup3D" type="Area3D" groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_clue")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_paper")
+surface_material_override/0 = SubResource("StandardMaterial3D_paper")
+
+[node name="Indicator" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+billboard = 1
+double_sided = false
+modulate = Color(1, 0.9, 0.3, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "[? Pista]"
+font_size = 26
+outline_size = 4

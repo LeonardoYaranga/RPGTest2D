@@ -46,6 +46,26 @@ func change_scene_to_file(path: String) -> void:
 	start_transition(path)
 
 
+## Transitions to another room placing the player at a specific spawn marker.
+func change_scene_to_room(path: String, spawn_id: StringName = &"PlayerPos") -> void:
+	if path.is_empty():
+		push_warning("GameManager: empty room scene path.")
+		return
+	if is_instance_valid(GameState):
+		GameState.pending_spawn_id = spawn_id
+	start_transition(path)
+
+
+func trigger_ending(ending_id: StringName) -> void:
+	var summary: Dictionary = {
+		"ending_id": ending_id,
+		"flags": GameState.story_flags.duplicate() if is_instance_valid(GameState) else {},
+		"bonds": GameState.bonds.duplicate() if is_instance_valid(GameState) else {},
+		"has_clue": GameState.has_item(&"diario_roto") if is_instance_valid(GameState) else false
+	}
+	SignalHub.emit_on_ending_reached(ending_id, summary)
+
+
 func change_to_main_scene() -> void:
 	if MAIN == null:
 		push_warning("GameManager: MAIN scene is not set yet.")
@@ -117,7 +137,13 @@ func _setup_scene_entities(scene: Node) -> void:
 	if existing_player == null:
 		existing_player = get_tree().get_first_node_in_group(&"player") as Player3D
 
-	var spawn_pos: Marker3D = scene.find_child("PlayerPos", true, false) as Marker3D
+	var spawn_pos: Marker3D = null
+	if is_instance_valid(GameState) and not GameState.pending_spawn_id.is_empty():
+		spawn_pos = scene.find_child(str(GameState.pending_spawn_id), true, false) as Marker3D
+		GameState.pending_spawn_id = &""
+
+	if spawn_pos == null:
+		spawn_pos = scene.find_child("PlayerPos", true, false) as Marker3D
 	if spawn_pos == null:
 		spawn_pos = scene.get_node_or_null("PlayerPos") as Marker3D
 

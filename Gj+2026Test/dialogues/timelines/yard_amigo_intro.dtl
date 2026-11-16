@@ -1,0 +1,11 @@
+amigo: ¡Menos mal que estás aquí! Las cosas con Marcus se han salido de control...
+protagonista: ¿Qué pasó, Leo? ¿Otra vez te estuvo molestando?
+amigo: No solo a mí... Elena también está atrapada con él. Dicen que aceptó ser su pareja solo para evitar que él nos destroce a todos.
+amigo: Me siento un cobarde por no poder hacer nada.
+- No estás solo en esto, lo resolveremos juntos.
+	amigo: Gracias... saber que cuento contigo me da un poco de calma.
+	[signal arg="add_bond:amigo:1"]
+- Mantén la cabeza agachada por ahora.
+	amigo: Supongo que tienes razón... pero no podemos aguantar esto para siempre.
+amigo: Por cierto... hace unos minutos vi un brillo extraño cerca del árbol del rincón del patio. Algo raro está pasando allí.
+[signal arg="quest:Poder Desconocido|Investiga la presencia extraña cerca del viejo árbol en el patio."]

@@ -1,0 +1,15 @@
+chica: ¡Tú! ¿Qué haces aquí? Deberías dar media vuelta de inmediato.
+protagonista: Elena... vine a buscar respuestas. No puedes seguir soportando a Marcus.
+chica: ¡No lo entiendes! Si él te ve hablando conmigo, te destruirá a ti y a Leo. Estoy con él para que los deje en paz.
+- No le temo a Marcus. Lo venceré a golpes.
+	chica: ¡La violencia solo empeorará las cosas! Si solo buscas pelear, no eres diferente a él...
+	[signal arg="set_flag:confrontation_stance=true"]
+	[signal arg="set_flag:promised_peaceful_path=false"]
+- Dime la verdad, Elena. ¿Por qué Marcus actúa con tanto odio?
+	chica: No es tan simple... Encontré una página rota de su diario cerca de las taquillas. En su casa sufre constantes humillaciones, por eso proyecta esa furia aquí.
+	chica: Si tan solo alguien lograra hacerle ver que el respeto no se gana con miedo...
+	[signal arg="set_flag:promised_peaceful_path=true"]
+	[signal arg="set_flag:confrontation_stance=false"]
+	[signal arg="add_bond:chica:1"]
+chica: Marcus subió a la azotea. Si de verdad vas a encararlo, ten mucho cuidado.
+[signal arg="quest:La Azotea|Recoge la pista en el casillero y sube por la puerta a la azotea."]

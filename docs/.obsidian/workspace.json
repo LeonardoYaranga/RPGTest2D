@@ -11,10 +11,17 @@
             "id": "5e096cee296204ce",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "canvas",
+              "state": {
+                "file": "History/Examples/5Steps.canvas",
+                "viewState": {
+                  "x": -12,
+                  "y": 348.0000000000001,
+                  "zoom": -1.0445974447116038
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "5Steps"
             }
           }
         ]
@@ -184,8 +191,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "5e096cee296204ce",
+  "active": "1b05de3948759fdb",
   "lastOpenFiles": [
+    "History/Examples/4Steps.canvas",
+    "History/Examples/5Steps.canvas",
     "ANIMATION_ART_GUIDE.md",
     "GameJamDocs/[ES] GJ+ 26_27 - Temas.pdf",
     "GameJamDocs/[ES] GJ+ 26_27 - Guia de Supervivencia _ Jammer.pdf",
@@ -194,8 +203,6 @@
     "img/Pasted image 20261008184418.png",
     "History/Structure.md",
     "History/Stuctures.canvas",
-    "History/Examples/5Steps.canvas",
-    "History/Examples/4Steps.canvas",
     "History/Characters/Plantilla_Ficha_Personaje.md",
     "History/Characters/Refs/RefAntagonist.canvas"
   ]

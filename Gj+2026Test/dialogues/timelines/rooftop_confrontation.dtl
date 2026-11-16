@@ -1,0 +1,5 @@
+bully: Así que al fin te dignas a dar la cara, estúpido.
+bully: Te vi merodeando alrededor de Elena y susurrándole cosas a tu amiguito. Esta escuela es mía, ¿te quedó claro?
+protagonista: Esto se acaba hoy, Marcus.
+bully: ¡Jajaja! ¿Crees que un par de golpes te van a salvar? ¡Te voy a demoler!
+[signal arg="start_boss_fight"]

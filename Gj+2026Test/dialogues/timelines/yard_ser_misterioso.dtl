@@ -1,0 +1,14 @@
+ser_misterioso: Te observo, joven errante... Caminas buscando pasar desapercibido, pero la injusticia quema tu pecho.
+protagonista: ¿Qué... qué eres? ¿Una ilusión?
+ser_misterioso: Soy el eco de los vínculos que los humanos han olvidado. La fuerza no nace del miedo ni del aislamiento.
+ser_misterioso: Te concedo este don: cada relación sincera que forjes con otros aumentará tu determinación y desbloqueará tu verdadero poder en combate.
+- Acepto este don. Protegeré a mis compañeros.
+	ser_misterioso: Bien dicho. Tu espíritu ahora resuena con tus aliados.
+	[signal arg="set_flag:social_power_unlocked=true"]
+	[signal arg="add_bond:ser_misterioso:1"]
+- No pedí esto, pero haré lo necesario.
+	ser_misterioso: La responsabilidad no siempre se elige, pero define quién eres.
+	[signal arg="set_flag:social_power_unlocked=true"]
+	[signal arg="add_bond:ser_misterioso:1"]
+ser_misterioso: La puerta hacia el pasillo escolar ahora está abierta ante ti. Ve y enfrenta la raíz del conflicto.
+[signal arg="quest:Hacia el Interior|Avanza por la puerta hacia los casilleros del pasillo escolar."]

@@ -11,21 +11,35 @@ config_version=5
 [application]
 
 config/name="GodotTestResources"
-run/main_scene="res://scenes/levels/level_25d_test.tscn"
+run/main_scene="res://scenes/levels/school_yard_3d.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SignalHub="*uid://dpd61o6u8m1id"
+GameState="*res://globals/game_state.gd"
 GameManager="*uid://n6pi3vkem06l"
-_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 Dialogic="*uid://ds2q0uclmolvu"
+DialogicBridge="*res://globals/dialogic_bridge.gd"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [dialogic]
 
-directories/dch_directory={}
-directories/dtl_directory={}
+directories/dch_directory={
+"amigo": "res://dialogues/characters/amigo.dch",
+"bully": "res://dialogues/characters/bully.dch",
+"chica": "res://dialogues/characters/chica.dch",
+"protagonista": "res://dialogues/characters/protagonista.dch",
+"ser_misterioso": "res://dialogues/characters/ser_misterioso.dch"
+}
+directories/dtl_directory={
+"hallway_chica_decision": "res://dialogues/timelines/hallway_chica_decision.dtl",
+"rooftop_confrontation": "res://dialogues/timelines/rooftop_confrontation.dtl",
+"rooftop_resolution": "res://dialogues/timelines/rooftop_resolution.dtl",
+"yard_amigo_intro": "res://dialogues/timelines/yard_amigo_intro.dtl",
+"yard_ser_misterioso": "res://dialogues/timelines/yard_ser_misterioso.dtl"
+}
 layout/style_directory={}
 
 [display]

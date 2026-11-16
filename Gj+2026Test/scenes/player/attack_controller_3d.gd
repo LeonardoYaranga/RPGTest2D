@@ -307,13 +307,24 @@ func _check_hits() -> void:
 			continue
 		if target.has_method(&"take_hit"):
 			_hit_targets.append(target)
+			var bonus_dmg: int = 0
+			if is_instance_valid(GameState) and GameState.is_flag(&"social_power_unlocked"):
+				bonus_dmg = GameState.get_bond(&"amigo") + GameState.get_bond(&"chica") + GameState.get_bond(&"ser_misterioso")
+
+			var applied_damage: int = _current.damage + bonus_dmg
 			_combo_hits += 1
-			_combo_damage += _current.damage
+			_combo_damage += applied_damage
 			SignalHub.emit_on_combo_hit_scored(_combo_hits, _combo_damage, _current.id)
-			_log("    HIT %s with %s (dmg %d) [%d hits, %d total dmg]" % [
-				target.name, _current.id, _current.damage, _combo_hits, _combo_damage
+			_log("    HIT %s with %s (dmg %d + bonus %d = %d) [%d hits, %d total dmg]" % [
+				target.name, _current.id, _current.damage, bonus_dmg, applied_damage, _combo_hits, _combo_damage
 			])
-			target.take_hit(_current, player.global_position)
+
+			var attack_data: AttackDefinition = _current
+			if bonus_dmg > 0:
+				attack_data = _current.duplicate() as AttackDefinition
+				attack_data.damage = applied_damage
+
+			target.take_hit(attack_data, player.global_position)
 			if _current.hitstop > 0.0:
 				player.apply_hitstop(_current.hitstop)
 				if target.has_method(&"apply_hitstop"):

@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/interactables/room_portal_3d.gd" id="1_portal"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_portal"]
+size = Vector3(1.6, 2.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+size = Vector3(1.2, 2.0, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door"]
+albedo_color = Color(0.24, 0.18, 0.12, 1)
+roughness = 0.8
+
+[node name="RoomPortal3D" type="Area3D" groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_portal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("BoxShape3D_portal")
+
+[node name="DoorMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+mesh = SubResource("BoxMesh_frame")
+surface_material_override/0 = SubResource("StandardMaterial3D_door")
+
+[node name="Indicator" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 1
+double_sided = false
+modulate = Color(0.4, 0.9, 1, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "Puerta"
+font_size = 28
+outline_size = 4

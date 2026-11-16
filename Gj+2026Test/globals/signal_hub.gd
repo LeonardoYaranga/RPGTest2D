@@ -51,3 +51,22 @@ func emit_on_combo_completed(buffer: String, attack_id: StringName) -> void:
 func emit_on_combo_dropped(reason: String) -> void:
 	combo_dropped.emit(reason)
 #Combat
+
+#Narrative & RPG (GameState / Dialogic)
+signal quest_updated(title: String, objective: String)
+signal inventory_changed(inventory: Dictionary)
+signal bond_updated(npc_id: StringName, level: int)
+signal skill_unlocked(skill_id: StringName)
+signal ending_reached(ending_id: StringName, summary: Dictionary)
+#---
+func emit_on_quest_updated(title: String, objective: String) -> void:
+	quest_updated.emit(title, objective)
+func emit_on_inventory_changed(inventory: Dictionary) -> void:
+	inventory_changed.emit(inventory)
+func emit_on_bond_updated(npc_id: StringName, level: int) -> void:
+	bond_updated.emit(npc_id, level)
+func emit_on_skill_unlocked(skill_id: StringName) -> void:
+	skill_unlocked.emit(skill_id)
+func emit_on_ending_reached(ending_id: StringName, summary: Dictionary) -> void:
+	ending_reached.emit(ending_id, summary)
+#Narrative

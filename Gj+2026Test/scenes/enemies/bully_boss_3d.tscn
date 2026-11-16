@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/melee_brawler_3d.tscn" id="1_brawler"]
+[ext_resource type="Script" path="res://scenes/enemies/bully_boss_3d.gd" id="2_bully"]
+[ext_resource type="Script" path="res://scenes/npcs/interaction_forwarder_3d.gd" id="3_fwd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_interact"]
+radius = 1.6
+height = 1.6
+
+[node name="BullyBoss3D" groups=["interactable"] instance=ExtResource("1_brawler")]
+script = ExtResource("2_bully")
+is_hostile = false
+pre_fight_timeline = "rooftop_confrontation"
+post_fight_timeline = "rooftop_resolution"
+max_health = 100
+move_speed = 3.3
+base_tint = Color(1, 0.4, 0.4, 1)
+
+[node name="QuestIndicator" type="Label3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+billboard = 1
+double_sided = false
+modulate = Color(1, 0.25, 0.25, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "!"
+font_size = 44
+outline_size = 6
+
+[node name="InteractionArea" type="Area3D" parent="." index="7" groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_fwd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CylinderShape3D_interact")

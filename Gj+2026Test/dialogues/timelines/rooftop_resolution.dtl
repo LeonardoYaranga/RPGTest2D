@@ -1,0 +1,11 @@
+bully: *Jadeando en el suelo* Maldición... ¿Cómo... cómo demonios pudiste ganarme...?
+protagonista: La fuerza verdadera no viene del aislamiento ni de intimidar a los débiles. Proviene de los lazos que nos unen.
+- Marcus, leí la página de tu diario. Sé lo que sufres en casa... El miedo no es la solución, la confianza sí.
+	bully: ¿Tú... tú viste eso...? Nadie nunca se había detenido a preguntarme qué sentía. Solo esperaban que fuera el monstruo que todos temían...
+	bully: Me rindo. Tienes razón... Dejaré en paz a Elena y a todos. Gracias por abrirme los ojos.
+	[signal arg="set_flag:bully_defeated=true"]
+	[signal arg="ending:redemption"]
+- Quédate en el suelo, Marcus. Si vuelves a molestar a Elena o a Leo, te irá peor.
+	bully: ¡Cállate! Me venciste hoy, pero esto no se va a quedar así... Algún día me las pagarás.
+	[signal arg="set_flag:bully_defeated=true"]
+	[signal arg="ending:brute_force"]

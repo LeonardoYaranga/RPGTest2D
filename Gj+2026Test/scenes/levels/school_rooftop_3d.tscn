@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/levels/level_base_3d.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://assets/extracted_tiles/stone_floor.png" id="2_stone"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/room_portal_3d.tscn" id="3_portal"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bully_boss_3d.tscn" id="4_boss"]
+[ext_resource type="PackedScene" path="res://scenes/player/player_3d.tscn" id="5_player"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_roof_floor"]
+albedo_texture = ExtResource("2_stone")
+roughness = 0.8
+uv1_scale = Vector3(28, 16, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_roof"]
+material = SubResource("StandardMaterial3D_roof_floor")
+size = Vector2(28, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ac"]
+albedo_color = Color(0.48, 0.5, 0.55, 1)
+metallic = 0.5
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_ac"]
+material = SubResource("StandardMaterial3D_ac")
+size = Vector3(2.2, 1.6, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ac"]
+size = Vector3(2.2, 1.6, 1.4)
+
+[node name="SchoolRooftop3D" instance=ExtResource("1_base")]
+
+[node name="MeshInstance3D" parent="Floor" index="0"]
+mesh = SubResource("PlaneMesh_roof")
+
+[node name="ACUnit1" type="StaticBody3D" parent="Props" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.8, -5)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/ACUnit1" index="0"]
+mesh = SubResource("BoxMesh_ac")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/ACUnit1" index="1"]
+shape = SubResource("BoxShape3D_ac")
+
+[node name="ACUnit2" type="StaticBody3D" parent="Props" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.8, -5)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/ACUnit2" index="0"]
+mesh = SubResource("BoxMesh_ac")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/ACUnit2" index="1"]
+shape = SubResource("BoxShape3D_ac")
+
+[node name="PortalToHallway" parent="Interactives" index="0" instance=ExtResource("3_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 0, 0)
+target_scene_path = "res://scenes/levels/school_hallway_3d.tscn"
+target_spawn_id = &"Spawn_FromRooftop"
+prompt_message = "Bajar al Pasillo Escolar"
+
+[node name="BullyBoss" parent="Enemies" index="0" instance=ExtResource("4_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0)
+
+[node name="PlayerPos" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+
+[node name="Spawn_FromHallway" type="Marker3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+
+[node name="Player3D" parent="." index="9" instance=ExtResource("5_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)

@@ -161,11 +161,23 @@ func update_steps_sound(input: Vector2) -> void:
 
 
 #region Interaction
+func _resolve_interactable(node: Node) -> Node:
+	if node == null:
+		return null
+	if node.has_method(&"interact"):
+		return node
+	var parent_node: Node = node.get_parent()
+	if parent_node and parent_node.has_method(&"interact"):
+		return parent_node
+	return node
+
+
 func try_interact() -> void:
 	if _current_interactable == null:
 		return
-	if _current_interactable.has_method(&"interact"):
-		_current_interactable.interact(self)
+	var target: Node = _resolve_interactable(_current_interactable)
+	if target and target.has_method(&"interact"):
+		target.interact(self)
 
 
 func _update_current_interactable() -> void:
@@ -188,11 +200,16 @@ func _update_current_interactable() -> void:
 
 
 func _add_interactable(node: Node) -> void:
-	if node.is_in_group(&"interactable") and not _nearby_interactables.has(node):
-		_nearby_interactables.append(node)
+	var target: Node = _resolve_interactable(node)
+	if target and (target.is_in_group(&"interactable") or node.is_in_group(&"interactable")):
+		if not _nearby_interactables.has(target):
+			_nearby_interactables.append(target)
 
 
 func _remove_interactable(node: Node) -> void:
+	var target: Node = _resolve_interactable(node)
+	if target:
+		_nearby_interactables.erase(target)
 	_nearby_interactables.erase(node)
 
 

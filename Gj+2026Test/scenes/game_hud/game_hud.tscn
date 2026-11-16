@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b886h75b16sda" path="res://assets/HUD/HealthBar/greenbar (2).png" id="4_kum1k"]
 [ext_resource type="PackedScene" path="res://scenes/game_hud/pinned_combos.tscn" id="5_pinned"]
 [ext_resource type="PackedScene" path="res://scenes/game_hud/input_history.tscn" id="6_inputs"]
+[ext_resource type="PackedScene" path="res://scenes/game_hud/ending_overlay.tscn" id="7_ending"]
 
 [node name="GameHud" type="Control" unique_id=1404476535]
 process_mode = 3
@@ -125,3 +126,41 @@ offset_top = -200.0
 offset_right = 340.0
 offset_bottom = -15.0
 grow_vertical = 0
+
+[node name="QuestPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -340.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 110.0
+grow_horizontal = 0
+
+[node name="VBox" type="VBoxContainer" parent="QuestPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="QuestTitle" type="Label" parent="QuestPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "MISIÓN: Primer Día"
+
+[node name="QuestObjective" type="Label" parent="QuestPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 12
+text = "Habla con tu amigo Leo en el patio escolar."
+autowrap_mode = 3
+
+[node name="InventoryClues" type="Label" parent="QuestPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Pistas: Ninguna"
+
+[node name="EndingOverlay" parent="." instance=ExtResource("7_ending")]
+visible = false
+layout_mode = 1
